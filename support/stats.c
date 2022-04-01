@@ -1,6 +1,7 @@
 //
 // Created by sm1091 on 01/04/2022.
 //
+#include "stdlib.h"
 
 typedef struct TIMENODE {
     struct TIMENODE *prevTime;
@@ -9,7 +10,6 @@ typedef struct TIMENODE {
 
 typedef struct {
     int totalCarsTransferred;
-    timenode_t *rootTime;  // Create a linked list of wait times
     timenode_t *tailTime;
 
     int overflowTime;  // Once we have completed 500 iterations, we then start the overflow counter, to count
@@ -21,7 +21,6 @@ stats_t *createStats() {
     stats_t *stats = (stats_t *) xmalloc(sizeof(stats_t));
 
     stats->totalCarsTransferred = 0;
-    stats->rootTime = NULL;
     stats->tailTime = NULL;
 
     stats->overflowTime = 0;
@@ -33,8 +32,6 @@ void addWaitTime(stats_t *stats, int time) {
 
     timenode->waitTime = time;
     timenode->prevTime = stats->tailTime;
-    if (stats->rootTime == NULL) stats->rootTime = timenode;
 
     stats->tailTime = timenode;
-
 };

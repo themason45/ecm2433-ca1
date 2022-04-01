@@ -77,6 +77,9 @@ bool perhapsTransferCar(side_t *side) {
 //    Do statistics stuff here
 
     int waitTime = side->currentIteration - cHead->iterAdded;
+    addWaitTime(side->stats, waitTime);
+
+    side->stats->totalCarsTransferred++;
 
 //  Now remove this item, and replace it with the next item
     side->head = cHead->nextNode;
@@ -84,7 +87,6 @@ bool perhapsTransferCar(side_t *side) {
     if (side->head != NULL) side->head->prevNode = NULL;
 
     free(cHead);
-
 
     return true;
 }

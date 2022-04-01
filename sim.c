@@ -40,15 +40,15 @@ int main() {
     side_t *left = createSide(r, true);
 
     perhapsAddCar(left);
-    left->currentIteration++;
+    left->currentIteration++; // 1
     perhapsAddCar(left);
-    left->currentIteration++;
+    left->currentIteration++; // 2
     perhapsAddCar(left);
-    left->currentIteration++;
+    left->currentIteration++; // 3
     perhapsTransferCar(left);
-    left->currentIteration++;
+    left->currentIteration++; // 4
     perhapsAddCar(left);
-    left->currentIteration++;
+    left->currentIteration++; // 5
     perhapsTransferCar(left);
 
 //    printf("%f", fabs(gsl_ran_gaussian(r, 4.0)));
