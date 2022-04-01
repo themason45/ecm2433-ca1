@@ -5,16 +5,34 @@
 #include "support/side.c"
 
 // How many iterations are we going to run?
-#define ITER_COUNT 500
+#define ITER_COUNT 100
 
 
 void runOneSimulation(gsl_rng *r) {
-
+    bool leftStartsGreen = randBool(r, 4);
+    side_t *left = createSide(r, leftStartsGreen);
+    side_t *right = createSide(r, !leftStartsGreen);
 
 //  In each iteration, we could either change the lights, or run all three instructions
     for (int i = 0; i < ITER_COUNT; ++i) {
 //        Choose either option
+        if (randBool(r, 4)) {
+//            If true, we need to swap the lights round
+        } else {
+//          If false, then we run the left, and right, add car process
+            perhapsAddCar(left);
+            perhapsAddCar(right);
+
+//          Then we try transferring the cars (only one will run, depending on who has the green light)
+            perhapsTransferCar(left);
+            perhapsTransferCar(right);
+        }
+
+        left->currentIteration++;
+        right->currentIteration++;
     }
+
+    printf("%f", avgWaitTIme(left->stats));
 
 //    while (lCarCount > 0 || rCarCount > 0) {
 ////         Choose either option
@@ -33,23 +51,9 @@ int main() {
     T = gsl_rng_default;
     r = gsl_rng_alloc(T);
 
-    gsl_rng_set(r,time(0));
+    gsl_rng_set(r, time(0));
 
     runOneSimulation(r);
-
-    side_t *left = createSide(r, true);
-
-    perhapsAddCar(left);
-    left->currentIteration++; // 1
-    perhapsAddCar(left);
-    left->currentIteration++; // 2
-    perhapsAddCar(left);
-    left->currentIteration++; // 3
-    perhapsTransferCar(left);
-    left->currentIteration++; // 4
-    perhapsAddCar(left);
-    left->currentIteration++; // 5
-    perhapsTransferCar(left);
 
 //    printf("%f", fabs(gsl_ran_gaussian(r, 4.0)));
     return EXIT_SUCCESS;

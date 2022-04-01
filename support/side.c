@@ -44,7 +44,7 @@ side_t *createSide(gsl_rng *r, bool hasGreenLight) {
 }
 
 bool perhapsAddCar(side_t *side) {
-//    if (!randBool(side->randRange, 4.0)) return false;
+    if (!randBool(side->randRange, 4.0)) return false;
 
 // Enqueue a car
 //  Get the head of the list
@@ -69,14 +69,14 @@ bool perhapsTransferCar(side_t *side) {
     if (!side->hasGreenLight) return false;
 
 //    If we do, then check if we should (random number check), and carry on
-    //    if (!randBool(side->randRange, 4.0)) return false;
+    if (!randBool(side->randRange, 4.0)) return false;
 
     node_t *cHead = side->head;
-//    Do statistics stuff here
+    if (cHead == NULL) return false;  // There are no cars to transfer, so return false
 
+//    Do statistics stuff here
     int waitTime = side->currentIteration - cHead->iterAdded;
     addWaitTime(side->stats, waitTime);
-
     side->stats->totalCarsTransferred++;
 
 //  Now remove this item, and replace it with the next item

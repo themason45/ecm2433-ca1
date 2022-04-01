@@ -2,6 +2,7 @@
 // Created by sm1091 on 01/04/2022.
 //
 #include "stdlib.h"
+#include "math.h"
 
 typedef struct TIMENODE {
     struct TIMENODE *prevTime;
@@ -35,3 +36,28 @@ void addWaitTime(stats_t *stats, int time) {
 
     stats->tailTime = timenode;
 };
+
+double avgWaitTIme(stats_t* stats) {
+    if (stats->totalCarsTransferred == 0) return (0.0/0);
+    timenode_t *currentNode = stats->tailTime;
+    float rT = (float) currentNode->waitTime;
+
+    while ((currentNode = currentNode->prevTime) != NULL) {
+        rT += (float) currentNode->waitTime;
+    }
+
+    return (double) rT / stats->totalCarsTransferred;
+}
+
+int maxWaitTime(stats_t* stats) {
+    timenode_t *currentNode = stats->tailTime;
+    int cMax = currentNode->waitTime;
+
+    while ((currentNode = currentNode->prevTime) != NULL) {
+        if (currentNode->waitTime > cMax) {
+            cMax = currentNode->waitTime;
+        }
+    }
+
+    return cMax;
+}
