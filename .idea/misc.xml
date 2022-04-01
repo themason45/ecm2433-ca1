@@ -24,16 +24,16 @@
           <option name="fileUrl" value="file://$PROJECT_DIR$/Makefile" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="1688" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/sim.c" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
           <option name="caretOffset" value="330" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/support/samlib.c" />
         </OpenedFileInfo>
         <OpenedFileInfo>
           <option name="caretOffset" value="1502" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/support/side.c" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="1688" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/sim.c" />
         </OpenedFileInfo>
       </list>
     </option>
