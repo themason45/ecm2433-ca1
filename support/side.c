@@ -61,8 +61,6 @@ bool perhapsAddCar(side_t *side) {
 
     side->tail = newNode;
 
-//    Do statistics stuff here
-
     return true;  // A new car was added
 }
 
