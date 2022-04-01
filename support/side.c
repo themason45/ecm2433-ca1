@@ -5,7 +5,9 @@
 #include "stdlib.h"
 #include "stdbool.h"
 #include "gsl/gsl_rng.h"
+
 #include "samlib.c"
+#include "stats.c"
 
 typedef struct NODE {
     struct NODE *nextNode;
@@ -22,7 +24,24 @@ typedef struct {
     gsl_rng *randRange;  // The gsl range item to base our random numbers off of (can change for different sides?)
 
     int currentIteration;
+
+    stats_t *stats;
 } side_t;
+
+
+side_t *createSide(gsl_rng *r, bool hasGreenLight) {
+    side_t *side = (side_t *) xmalloc(sizeof(side_t));
+
+    side->tail = NULL;
+    side->head = NULL;
+
+    side->currentIteration = 0;
+    side->randRange = r;
+    side->hasGreenLight = hasGreenLight;
+
+    side->stats = createStats();
+    return side;
+}
 
 bool perhapsAddCar(side_t *side) {
 //    if (!randBool(side->randRange, 4.0)) return false;
@@ -55,12 +74,17 @@ bool perhapsTransferCar(side_t *side) {
     //    if (!randBool(side->randRange, 4.0)) return false;
 
     node_t *cHead = side->head;
+//    Do statistics stuff here
+
+    int waitTime = side->currentIteration - cHead->iterAdded;
+
+//  Now remove this item, and replace it with the next item
     side->head = cHead->nextNode;
-    side->head->prevNode = NULL;
+
+    if (side->head != NULL) side->head->prevNode = NULL;
 
     free(cHead);
 
-//    Do statistics stuff here
 
     return true;
 }

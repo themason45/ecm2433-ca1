@@ -9,11 +9,8 @@
 
 
 void runOneSimulation(gsl_rng *r) {
-//  We want to initialise our variables here
-//  This includes what state our lights our in, and how many cars are on either side.
-    bool lGreen = false;  // Our left light is green? If not, then our right one is
-    int lCarCount = 0;
-    int rCarCount = 0;
+
+
 //  In each iteration, we could either change the lights, or run all three instructions
     for (int i = 0; i < ITER_COUNT; ++i) {
 //        Choose either option
@@ -40,13 +37,7 @@ int main() {
 
     runOneSimulation(r);
 
-    side_t* left = (side_t*) xmalloc(sizeof(side_t));
-    left->tail = NULL;
-    left->head = NULL;
-
-    left->currentIteration = 0;
-    left->randRange = r;
-    left->hasGreenLight = true;
+    side_t *left = createSide(r, true);
 
     perhapsAddCar(left);
     left->currentIteration++;
