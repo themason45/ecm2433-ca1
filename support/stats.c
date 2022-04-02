@@ -12,8 +12,8 @@ typedef struct TIMENODE {
 
 typedef struct {
     int totalCarsTransferred;
-    timenode_t *tailTime;
 
+    timenode_t *tailTime;
     int overflowTime;  // Once we have completed 500 iterations, we then start the overflow counter, to count
     // how long it takes for the side to clear
 } stats_t;
@@ -33,29 +33,44 @@ void addWaitTime(stats_t *stats, int time) {
     timenode_t *timenode = (timenode_t *) xmalloc(sizeof(timenode_t));
 
     timenode->waitTime = time;
-    timenode->prevTime = stats->tailTime;
+    if (time > 1000) printf("%d", time);
 
+
+    timenode->prevTime = stats->tailTime;
     stats->tailTime = timenode;
 };
 
-double avgWaitTIme(stats_t* stats) {
-    if (stats->totalCarsTransferred == 0) return (0.0/0);
-    timenode_t *currentNode = stats->tailTime;
-    float rT = (float) currentNode->waitTime;
+double avgWaitTime(stats_t *stats) {
+    if (stats->totalCarsTransferred == 0) return -1;
 
-    while ((currentNode = currentNode->prevTime) != NULL) {
-        rT += (float) currentNode->waitTime;
+    timenode_t *currentNode = stats->tailTime;
+    int rT = 0;
+
+//    while ((currentNode = currentNode->prevTime) != NULL) {
+//        rT += currentNode->waitTime;
+//    }
+
+    for (int i = 0; i < stats->totalCarsTransferred - 1; ++i) {
+        if (currentNode->waitTime > 500) continue;
+
+        rT += currentNode->waitTime;
+        if (currentNode->prevTime == NULL) continue;
+
+        currentNode = currentNode->prevTime;
     }
 
     return (double) rT / stats->totalCarsTransferred;
 }
 
-int maxWaitTime(stats_t* stats) {
+int maxWaitTime(stats_t *stats) {
     timenode_t *currentNode = stats->tailTime;
     int cMax = currentNode->waitTime;
 
-    while ((currentNode = currentNode->prevTime) != NULL) {
-        if (currentNode->waitTime > cMax) {
+    for (int i = 0; i < stats->totalCarsTransferred; ++i) {
+        if (currentNode->waitTime > 500 || currentNode->prevTime == NULL) continue;
+
+        currentNode = currentNode->prevTime;
+        if (currentNode->waitTime < 500 && currentNode->waitTime > cMax) {
             cMax = currentNode->waitTime;
         }
     }

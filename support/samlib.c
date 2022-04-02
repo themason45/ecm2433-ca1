@@ -5,6 +5,7 @@
 // An assortion of things that may be needed, sort of a pun of "stdlib.h"
 
 #include "stdlib.h"
+#include "stdio.h"
 #include "stdbool.h"
 #include "gsl/gsl_rng.h"
 #include "gsl/gsl_randist.h"
@@ -13,6 +14,7 @@ void *xmalloc(size_t size) {
     void *ptr = NULL;
     if ((ptr = malloc(size)) == NULL) {
 //        Inform the user somehow
+        fprintf(stderr, "Unable to allocate %ld bytes", size);
     }
     return ptr;
 }
