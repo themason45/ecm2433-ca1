@@ -20,20 +20,16 @@
     <option name="openedFilesInfos">
       <list>
         <OpenedFileInfo>
-          <option name="caretOffset" value="1036" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/sim.c" />
+          <option name="caretOffset" value="81" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/support/stats.c" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="330" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/support/samlib.c" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="1756" />
+          <option name="caretOffset" value="1811" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/support/side.c" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="850" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/support/stats.c" />
+          <option name="caretOffset" value="1450" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/sim.c" />
         </OpenedFileInfo>
       </list>
     </option>

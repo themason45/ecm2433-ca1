@@ -12,7 +12,7 @@
 void *xmalloc(size_t size) {
     void *ptr = NULL;
     if ((ptr = malloc(size)) == NULL) {
-//        Inform the user
+//        Inform the user somehow
     }
     return ptr;
 }

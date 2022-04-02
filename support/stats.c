@@ -2,6 +2,7 @@
 // Created by sm1091 on 01/04/2022.
 //
 #include "stdlib.h"
+#include "samlib.c"
 #include "math.h"
 
 typedef struct TIMENODE {

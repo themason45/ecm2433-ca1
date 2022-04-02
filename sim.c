@@ -7,17 +7,29 @@
 // How many iterations are we going to run?
 #define ITER_COUNT 100
 
+// Store the simulation info in a struct, so we can pass this back to the
+typedef struct {
+    side_t *left;
+    side_t *right;
 
-void runOneSimulation(gsl_rng *r) {
-    bool leftStartsGreen = randBool(r, 4);
-    side_t *left = createSide(r, leftStartsGreen);
-    side_t *right = createSide(r, !leftStartsGreen);
+    gsl_rng *randRange;
+} sim_t;
 
+void runOneSimulation(sim_t *sim) {
+    gsl_rng *r = sim->randRange;
+    side_t *left = sim->left;
+    side_t *right = sim->right;
+
+    int greenItersRemaining = 0;
+    int i = 0;
 //  In each iteration, we could either change the lights, or run all three instructions
-    for (int i = 0; i < ITER_COUNT; ++i) {
+    for (; i < ITER_COUNT; ++i) {
 //        Choose either option
-        if (randBool(r, 4)) {
-//            If true, we need to swap the lights round
+        if (greenItersRemaining == 0) {
+//          If true, we need to swap the lights round
+            side_t *newGreen = swapSides(left, right);
+//          Then set the countdown to the green length, in order to keep it green for the required length of time
+            greenItersRemaining = newGreen->greenLength;
         } else {
 //          If false, then we run the left, and right, add car process
             perhapsAddCar(left);
@@ -30,9 +42,8 @@ void runOneSimulation(gsl_rng *r) {
 
         left->currentIteration++;
         right->currentIteration++;
+        greenItersRemaining--;
     }
-
-    printf("%f", avgWaitTIme(left->stats));
 
 //    while (lCarCount > 0 || rCarCount > 0) {
 ////         Choose either option
@@ -40,6 +51,18 @@ void runOneSimulation(gsl_rng *r) {
 ////         If we're choosing not to change the lights, then don't add any more cars
 //    }
 //  Once all iterations are complete, we have to clear both ends, with further iterations
+}
+
+sim_t *createSimulation(gsl_rng *r, int leftGreenTime, int rightGreenTime) {
+    sim_t *sim = (sim_t *) xmalloc(sizeof(sim_t));
+
+    sim->randRange = r;
+
+    bool leftStartsGreen = randBool(r, 4);
+    sim->left = createSide(r, leftStartsGreen, leftGreenTime);
+    sim->right = createSide(r, !leftStartsGreen, rightGreenTime);
+
+    return sim;
 }
 
 int main() {
@@ -53,8 +76,8 @@ int main() {
 
     gsl_rng_set(r, time(0));
 
-    runOneSimulation(r);
+    sim_t *simulation = createSimulation(r, 6, 6);
+    runOneSimulation(simulation);
 
-//    printf("%f", fabs(gsl_ran_gaussian(r, 4.0)));
     return EXIT_SUCCESS;
 }

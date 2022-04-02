@@ -6,7 +6,6 @@
 #include "stdbool.h"
 #include "gsl/gsl_rng.h"
 
-#include "samlib.c"
 #include "stats.c"
 
 typedef struct NODE {
@@ -21,6 +20,7 @@ typedef struct {
     node_t *tail;  // The tail of our queue
 
     bool hasGreenLight;  // Does this side have the green light
+    int greenLength;
     gsl_rng *randRange;  // The gsl range item to base our random numbers off of (can change for different sides?)
 
     int currentIteration;
@@ -29,7 +29,7 @@ typedef struct {
 } side_t;
 
 
-side_t *createSide(gsl_rng *r, bool hasGreenLight) {
+side_t *createSide(gsl_rng *r, bool hasGreenLight, int greenLength) {
     side_t *side = (side_t *) xmalloc(sizeof(side_t));
 
     side->tail = NULL;
@@ -38,6 +38,7 @@ side_t *createSide(gsl_rng *r, bool hasGreenLight) {
     side->currentIteration = 0;
     side->randRange = r;
     side->hasGreenLight = hasGreenLight;
+    side->greenLength = greenLength;
 
     side->stats = createStats();
     return side;
@@ -87,4 +88,16 @@ bool perhapsTransferCar(side_t *side) {
     free(cHead);
 
     return true;
+}
+
+side_t *swapSides(side_t *s1, side_t *s2) {
+    bool s1Green = s1->hasGreenLight;
+
+    s1->hasGreenLight = !s1Green;
+    s2->hasGreenLight = s1Green;
+
+//    If side 1 wasn't green to begin with, it will be now, so return it
+    if (!s1Green) return s1;
+//    Otherwise, return side 2
+    return s2;
 }
