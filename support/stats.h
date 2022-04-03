@@ -23,6 +23,7 @@ typedef struct {
 
 stats_t *createStats();
 void addWaitTime(stats_t *stats, int time);
+void clearWaitTimes(stats_t *stats);
 double avgWaitTime(stats_t *stats);
 int maxWaitTime(stats_t *stats);
 

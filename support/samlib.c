@@ -12,6 +12,7 @@ void *xmalloc(size_t size) {
     if ((ptr = malloc(size)) == NULL) {
 //        Inform the user somehow
         fprintf(stderr, "Unable to allocate %ld bytes", size);
+        exit(EXIT_FAILURE);
     }
     return ptr;
 }

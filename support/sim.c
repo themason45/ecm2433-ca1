@@ -57,7 +57,6 @@ void runOneSimulation(sim_t *sim) {
 
         greenItersRemaining--;
     }
-
 }
 
 sim_t *createSimulation(gsl_rng *r, int leftGreenTime, int rightGreenTime, double leftRandBias, double rightRandBias) {
@@ -73,8 +72,6 @@ sim_t *createSimulation(gsl_rng *r, int leftGreenTime, int rightGreenTime, doubl
 }
 
 void run100Simulations(gsl_rng *r, int leftGreenTime, int rightGreenTime, double leftRandBias, double rightRandBias) {
-    sim_t *sims[100];
-
 //    Initialise statistics variables
     int leftCarsPassedRunningTotal = 0;
     int rightCarsPassedRunningTotal = 0;
@@ -91,8 +88,7 @@ void run100Simulations(gsl_rng *r, int leftGreenTime, int rightGreenTime, double
     for (int i = 0; i < SIM_COUNT; ++i) {
 //      Create a simulation
 //        printf("Simulation %d\n", i);
-        sim_t *sim = sims[i] = createSimulation(r, leftGreenTime, rightGreenTime, leftRandBias, rightRandBias);
-
+        sim_t *sim = createSimulation(r, leftGreenTime, rightGreenTime, leftRandBias, rightRandBias);
 //        printf("Running\n");
         runOneSimulation(sim);
 
@@ -115,11 +111,16 @@ void run100Simulations(gsl_rng *r, int leftGreenTime, int rightGreenTime, double
 
         leftOverflowTmeRunningTotal += lStats->overflowTime;
         rightOverflowTmeRunningTotal += rStats->overflowTime;
-    }
 
-//    Clear up here
-    for (int i = 0; i < SIM_COUNT; ++i) {
-        free(sims[i]);
+//        free(sims[i]->left);
+//        free(sims[i]->right);
+//        free(sims[i]);
+//
+//        clearWaitTimes(sims[i]->left->stats);
+//        clearWaitTimes(sims[i]->right->stats);
+//
+//        free(sims[i]->left->stats);
+//        free(sims[i]->right->stats);
     }
 
 //    Display full results

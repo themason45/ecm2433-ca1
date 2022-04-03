@@ -18,10 +18,20 @@ void addWaitTime(stats_t *stats, int time) {
 
     timenode->waitTime = time;
 
-
     timenode->prevTime = stats->tailTime;
     stats->tailTime = timenode;
 };
+
+void clearWaitTimes(stats_t*stats) {
+    timenode_t *nextTime = stats->tailTime;
+
+    while (nextTime != NULL) {
+        timenode_t *ttFree = nextTime;
+        nextTime = nextTime->prevTime;
+
+        free(ttFree);
+    }
+}
 
 double avgWaitTime(stats_t *stats) {
     if (stats->totalCarsTransferred == 0) return -1;

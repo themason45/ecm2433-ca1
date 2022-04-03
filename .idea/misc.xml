@@ -20,28 +20,32 @@
     <option name="openedFilesInfos">
       <list>
         <OpenedFileInfo>
-          <option name="caretOffset" value="793" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/README.md" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="143" />
+          <option name="caretOffset" value="0" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/support/samlib.h" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="96" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/support/sim.h" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="99" />
+          <option name="caretOffset" value="779" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/support/side.h" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="62" />
+          <option name="caretOffset" value="516" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/support/stats.h" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="155" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/Makefile" />
+          <option name="caretOffset" value="642" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/support/stats.c" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="1796" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/support/side.c" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="372" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/support/samlib.c" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="3983" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/support/sim.c" />
         </OpenedFileInfo>
       </list>
     </option>
