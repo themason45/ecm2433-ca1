@@ -21,6 +21,7 @@ typedef struct {
 
     bool hasGreenLight;  // Does this side have the green light
     int greenLength;
+    double randBias;
     gsl_rng *randRange;  // The gsl range item to base our random numbers off of (can change for different sides?)
 
     int currentIteration;
@@ -29,7 +30,7 @@ typedef struct {
 } side_t;
 
 
-side_t *createSide(gsl_rng *r, bool hasGreenLight, int greenLength) {
+side_t *createSide(gsl_rng *r, bool hasGreenLight, int greenLength, double randBias) {
     side_t *side = (side_t *) xmalloc(sizeof(side_t));
 
     side->tail = NULL;
@@ -38,14 +39,17 @@ side_t *createSide(gsl_rng *r, bool hasGreenLight, int greenLength) {
     side->currentIteration = 0;
     side->randRange = r;
     side->hasGreenLight = hasGreenLight;
+
     side->greenLength = greenLength;
+    side->randBias = randBias;
 
     side->stats = createStats();
     return side;
 }
 
 bool perhapsAddCar(side_t *side) {
-    if (!randBool(side->randRange, 4.0)) return false;
+//    The randBias is only used for adding cars, not removing them
+    if (!randBool(side->randRange, side->randBias)) return false;
 
 // Enqueue a car
 //  Get the head of the list
@@ -70,7 +74,7 @@ bool perhapsTransferCar(side_t *side) {
     if (!side->hasGreenLight) return false;
 
 //    If we do, then check if we should (random number check), and carry on
-    if (!randBool(side->randRange, 4.0)) return false;
+    if (!randBool(side->randRange, 0)) return false;
 
     node_t *cHead = side->head;
     if (cHead == NULL) return false;  // There are no cars to transfer, so return false

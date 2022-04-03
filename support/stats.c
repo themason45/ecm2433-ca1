@@ -33,7 +33,6 @@ void addWaitTime(stats_t *stats, int time) {
     timenode_t *timenode = (timenode_t *) xmalloc(sizeof(timenode_t));
 
     timenode->waitTime = time;
-    if (time > 1000) printf("%d", time);
 
 
     timenode->prevTime = stats->tailTime;

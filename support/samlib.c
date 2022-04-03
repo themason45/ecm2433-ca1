@@ -5,10 +5,13 @@
 // An assortion of things that may be needed, sort of a pun of "stdlib.h"
 
 #include "stdlib.h"
+#include "math.h"
 #include "stdio.h"
 #include "stdbool.h"
 #include "gsl/gsl_rng.h"
 #include "gsl/gsl_randist.h"
+
+#define STDEV 4.0
 
 void *xmalloc(size_t size) {
     void *ptr = NULL;
@@ -19,11 +22,15 @@ void *xmalloc(size_t size) {
     return ptr;
 }
 
-bool randBool(gsl_rng *r, double stdev) {
+bool randBool(gsl_rng *r, double cutOff) {
 //    This is a gaussian distribution, so the stdev value affects the standard distribution
 //    https://www.gnu.org/software/gsl/doc/html/randist.html#c.gsl_ran_gaussian
-    double val = gsl_ran_gaussian(r, stdev);
+    double val = gsl_ran_gaussian(r, STDEV);
 
-//    Return true if our random number is above, or equal to 0
-    return val >= 0;
+//    Return true if our random number is above, or equal to 0, and we have no bias
+    if (cutOff == 0) return val >= 0;
+
+//    Return true if our random number is under our cutoff (there is a higher probability if the cutoff is
+//    within 1 stdev etc), look at the PGF graph on the link above
+    return fabs(val) <= cutOff;
 }

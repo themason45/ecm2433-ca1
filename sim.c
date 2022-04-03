@@ -60,6 +60,7 @@ void runOneSimulation(sim_t *sim) {
             perhapsTransferCar(left);
             perhapsTransferCar(right);
         }
+
         left->currentIteration++;
         right->currentIteration++;
 
@@ -71,14 +72,14 @@ void runOneSimulation(sim_t *sim) {
 
 }
 
-sim_t *createSimulation(gsl_rng *r, int leftGreenTime, int rightGreenTime) {
+sim_t *createSimulation(gsl_rng *r, int leftGreenTime, int rightGreenTime, double leftRandBias, double rightRandBias) {
     sim_t *sim = (sim_t *) xmalloc(sizeof(sim_t));
 
     sim->randRange = r;
 
-    bool leftStartsGreen = randBool(r, 4);
-    sim->left = createSide(r, leftStartsGreen, leftGreenTime);
-    sim->right = createSide(r, !leftStartsGreen, rightGreenTime);
+    bool leftStartsGreen = randBool(r, 0);
+    sim->left = createSide(r, leftStartsGreen, leftGreenTime, leftRandBias);
+    sim->right = createSide(r, !leftStartsGreen, rightGreenTime, rightRandBias);
 
     return sim;
 }
@@ -181,7 +182,7 @@ int main() {
            "\t\t traffic arrival rate : %d \n" \
            "\t\t traffic light period: %d \n", lARate, lGPer, rARate, rGPer);
 
-    run100Simulations(r, 6, 8);
+    run100Simulations(r, 3, 3);
 
 //    TODO: Add a car arrival rate adjuster
 
