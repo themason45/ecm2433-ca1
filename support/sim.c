@@ -1,23 +1,11 @@
-#include "stdlib.h"
-#include "stdbool.h"
-#include "time.h"
-#include "gsl/gsl_rng.h"
-#include "support/side.c"
-#include "pthread.h"
 
+#include "sim.h"
 // How many iterations are we going to run?
 #define ITER_COUNT 500
 #define SIM_COUNT 100
 
 #define FMT_AVG(runningTotal) roundf(((double) runningTotal / SIM_COUNT) * 10) / 10
 
-// Store the simulation info in a struct, so we can pass this back to the
-typedef struct {
-    side_t *left;
-    side_t *right;
-
-    gsl_rng *randRange;
-} sim_t;
 
 void runOneSimulation(sim_t *sim) {
     side_t *left = sim->left;
@@ -155,37 +143,4 @@ void run100Simulations(gsl_rng *r, int leftGreenTime, int rightGreenTime, double
            FMT_AVG(rightMaxRunningTotal),
            FMT_AVG(rightOverflowTmeRunningTotal)
     );
-}
-
-int main() {
-//  Set up the random stuff
-    const gsl_rng_type *T;
-    gsl_rng *r;
-
-    gsl_rng_env_setup();
-    T = gsl_rng_default;
-    r = gsl_rng_alloc(T);
-
-    gsl_rng_set(r, time(0));
-
-    int lARate = 4;
-    int rARate = 4;
-
-    int lGPer = 6;
-    int rGPer = 6;
-
-    printf("Parameter values: \n" \
-           "\tFrom left: \n" \
-           "\t\t traffic arrival rate : %d \n" \
-           "\t\t traffic light period: %d \n" \
-           "\tFrom right: \n" \
-           "\t\t traffic arrival rate : %d \n" \
-           "\t\t traffic light period: %d \n", lARate, lGPer, rARate, rGPer);
-
-    run100Simulations(r, lGPer, rGPer, lARate, rARate);
-
-//    TODO: Add a car arrival rate adjuster
-
-
-    return EXIT_SUCCESS;
 }

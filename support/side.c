@@ -1,34 +1,7 @@
 //
 // Created by sm1091 on 01/04/2022.
 //
-
-#include "stdlib.h"
-#include "stdbool.h"
-#include "gsl/gsl_rng.h"
-
-#include "stats.c"
-
-typedef struct NODE {
-    struct NODE *nextNode;
-    struct NODE *prevNode;
-
-    int iterAdded;  // Iteration in which this node was created
-} node_t;
-
-typedef struct {
-    node_t *head;  // The head of our queue
-    node_t *tail;  // The tail of our queue
-
-    bool hasGreenLight;  // Does this side have the green light
-    int greenLength;
-    double randBias;
-    gsl_rng *randRange;  // The gsl range item to base our random numbers off of (can change for different sides?)
-
-    int currentIteration;
-
-    stats_t *stats;
-} side_t;
-
+#include "side.h"
 
 side_t *createSide(gsl_rng *r, bool hasGreenLight, int greenLength, double randBias) {
     side_t *side = (side_t *) xmalloc(sizeof(side_t));

@@ -1,15 +1,8 @@
 
 CC=gcc
-CFLAGS=-g -Wall -std=c99 -lgsl -lgslcblas -lm
+CFLAGS=-g -Wall -std=c99 -lgsl -lgslcblas -lm -Isupport
 
 all: simulations_app
 
-simulations_app: support/samlib.o support/stats.o support/side.o sim.o
-	$(CC) $(CFLAGS) sim.o -o runSimulation
-	$(MAKE) clean
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $^
-
-clean:
-	rm *.o
+simulations_app:
+	$(CC) $(CFLAGS) support/*.c -o runSimulations

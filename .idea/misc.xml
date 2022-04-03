@@ -20,20 +20,28 @@
     <option name="openedFilesInfos">
       <list>
         <OpenedFileInfo>
-          <option name="caretOffset" value="1959" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/support/side.c" />
+          <option name="caretOffset" value="793" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/README.md" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="4256" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/sim.c" />
+          <option name="caretOffset" value="143" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/support/samlib.h" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="1072" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/support/samlib.c" />
+          <option name="caretOffset" value="96" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/support/sim.h" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="1336" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/support/stats.c" />
+          <option name="caretOffset" value="99" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/support/side.h" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="62" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/support/stats.h" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="155" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/Makefile" />
         </OpenedFileInfo>
       </list>
     </option>

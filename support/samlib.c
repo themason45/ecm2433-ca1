@@ -4,13 +4,7 @@
 
 // An assortion of things that may be needed, sort of a pun of "stdlib.h"
 
-#include "stdlib.h"
-#include "math.h"
-#include "stdio.h"
-#include "stdbool.h"
-#include "gsl/gsl_rng.h"
-#include "gsl/gsl_randist.h"
-
+#include "samlib.h"
 #define STDEV 4.0
 
 void *xmalloc(size_t size) {
