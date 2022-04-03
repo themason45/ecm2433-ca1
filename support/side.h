@@ -28,10 +28,14 @@ typedef struct {
     stats_t *stats;
 } side_t;
 
+void clearSide(side_t *side);
+
 side_t *createSide(gsl_rng *r, bool hasGreenLight, int greenLength, double randBias);
 
 bool perhapsAddCar(side_t *side);
+
 bool perhapsTransferCar(side_t *side);
+
 side_t *swapSides(side_t *s1, side_t *s2);
 
 #endif //CA1_SIDE_H

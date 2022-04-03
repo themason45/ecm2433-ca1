@@ -91,7 +91,6 @@ void run100Simulations(gsl_rng *r, int leftGreenTime, int rightGreenTime, double
         sim_t *sim = createSimulation(r, leftGreenTime, rightGreenTime, leftRandBias, rightRandBias);
 //        printf("Running\n");
         runOneSimulation(sim);
-
 //        printf("Done\n");
 //        Update the current stats
         stats_t *lStats = sim->left->stats;
@@ -112,15 +111,9 @@ void run100Simulations(gsl_rng *r, int leftGreenTime, int rightGreenTime, double
         leftOverflowTmeRunningTotal += lStats->overflowTime;
         rightOverflowTmeRunningTotal += rStats->overflowTime;
 
-//        free(sims[i]->left);
-//        free(sims[i]->right);
-//        free(sims[i]);
-//
-//        clearWaitTimes(sims[i]->left->stats);
-//        clearWaitTimes(sims[i]->right->stats);
-//
-//        free(sims[i]->left->stats);
-//        free(sims[i]->right->stats);
+        clearSide(sim->left);
+        clearSide(sim->right);
+        free(sim);
     }
 
 //    Display full results
