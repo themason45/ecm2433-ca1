@@ -84,7 +84,7 @@ sim_t *createSimulation(gsl_rng *r, int leftGreenTime, int rightGreenTime, doubl
     return sim;
 }
 
-void run100Simulations(gsl_rng *r, int leftGreenTime, int rightGreenTime) {
+void run100Simulations(gsl_rng *r, int leftGreenTime, int rightGreenTime, double leftRandBias, double rightRandBias) {
     sim_t *sims[100];
 
 //    Initialise statistics variables
@@ -103,7 +103,7 @@ void run100Simulations(gsl_rng *r, int leftGreenTime, int rightGreenTime) {
     for (int i = 0; i < SIM_COUNT; ++i) {
 //      Create a simulation
 //        printf("Simulation %d\n", i);
-        sim_t *sim = sims[i] = createSimulation(r, leftGreenTime, rightGreenTime);
+        sim_t *sim = sims[i] = createSimulation(r, leftGreenTime, rightGreenTime, leftRandBias, rightRandBias);
 
 //        printf("Running\n");
         runOneSimulation(sim);
@@ -168,8 +168,8 @@ int main() {
 
     gsl_rng_set(r, time(0));
 
-    int lARate = 0;
-    int rARate = 0;
+    int lARate = 4;
+    int rARate = 4;
 
     int lGPer = 6;
     int rGPer = 6;
@@ -182,7 +182,7 @@ int main() {
            "\t\t traffic arrival rate : %d \n" \
            "\t\t traffic light period: %d \n", lARate, lGPer, rARate, rGPer);
 
-    run100Simulations(r, 3, 3);
+    run100Simulations(r, lGPer, rGPer, lARate, rARate);
 
 //    TODO: Add a car arrival rate adjuster
 

@@ -50,8 +50,6 @@ double avgWaitTime(stats_t *stats) {
 //    }
 
     for (int i = 0; i < stats->totalCarsTransferred - 1; ++i) {
-        if (currentNode->waitTime > 500) continue;
-
         rT += currentNode->waitTime;
         if (currentNode->prevTime == NULL) continue;
 
@@ -66,7 +64,7 @@ int maxWaitTime(stats_t *stats) {
     int cMax = currentNode->waitTime;
 
     for (int i = 0; i < stats->totalCarsTransferred; ++i) {
-        if (currentNode->waitTime > 500 || currentNode->prevTime == NULL) continue;
+        if (currentNode->prevTime == NULL) continue;
 
         currentNode = currentNode->prevTime;
         if (currentNode->waitTime < 500 && currentNode->waitTime > cMax) {
