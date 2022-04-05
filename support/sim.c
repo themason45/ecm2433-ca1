@@ -111,9 +111,9 @@ void run100Simulations(gsl_rng *r, int leftGreenTime, int rightGreenTime, double
         leftOverflowTmeRunningTotal += lStats->overflowTime;
         rightOverflowTmeRunningTotal += rStats->overflowTime;
 
-        clearSide(sim->left);
-        clearSide(sim->right);
-        free(sim);
+//        clearSide(sim->left);
+//        clearSide(sim->right);
+//        free(sim);
     }
 
 //    Display full results

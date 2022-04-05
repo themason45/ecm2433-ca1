@@ -26,13 +26,13 @@ void clearWaitTimes(stats_t*stats) {
     timenode_t *nextTime = stats->tailTime;
 
     timenode_t *ptrs[stats->totalCarsTransferred];
-    for (int i = stats->totalCarsTransferred - 1; i >= 0 ; i--) {
+    for (int i = 0; i < stats->totalCarsTransferred ; ++i) {
         ptrs[i] = nextTime;
         if (nextTime != NULL) nextTime = nextTime->prevTime;
     }
 
     for (int i = 1; i < stats->totalCarsTransferred; ++i) {
-        free(ptrs[i]);
+        if (ptrs[i] != NULL) free(ptrs[i]);
     }
 }
 
