@@ -72,6 +72,20 @@ sim_t *createSimulation(gsl_rng *r, int leftGreenTime, int rightGreenTime, doubl
 }
 
 void run100Simulations(gsl_rng *r, int leftGreenTime, int rightGreenTime, double leftRandBias, double rightRandBias) {
+
+//    Uncomment this, and comment the other printf statemtents, to output in a CSV compatible way (for analysis)
+//    printf("%0.1f, %d, %0.1f, %d,", leftRandBias,
+//           leftGreenTime,
+//           rightRandBias,
+//           rightGreenTime);
+    printf("Parameter values: \n" \
+           "\tFrom left: \n" \
+           "\t\t traffic arrival rate : %0.2f \n" \
+           "\t\t traffic light period: %d \n" \
+           "\tFrom right: \n" \
+           "\t\t traffic arrival rate : %0.2f \n" \
+           "\t\t traffic light period: %d \n", leftRandBias, leftGreenTime, rightRandBias, rightGreenTime);
+
 //    Initialise statistics variables
     int leftCarsPassedRunningTotal = 0;
     int rightCarsPassedRunningTotal = 0;
@@ -113,7 +127,7 @@ void run100Simulations(gsl_rng *r, int leftGreenTime, int rightGreenTime, double
 
 //        clearSide(sim->left);
 //        clearSide(sim->right);
-//        free(sim);
+        free(sim);
     }
 
 //    Display full results
@@ -137,4 +151,16 @@ void run100Simulations(gsl_rng *r, int leftGreenTime, int rightGreenTime, double
            FMT_AVG(rightMaxRunningTotal),
            FMT_AVG(rightOverflowTmeRunningTotal)
     );
+
+//    Uncomment this, and comment the other printf statemtents, to output in a CSV compatible way (for analysis)
+//  leftArrival, leftGreenTime, rightArrival, rightGreenTime, leftCarsPassed, leftAvgWait, leftMaxWait, leftClearance, right...
+//    printf("%0.2f, %0.2f, %0.2f, %0.2f, %0.2f, %0.2f, %0.2f, %0.2f\n",
+//           FMT_AVG(leftCarsPassedRunningTotal),
+//           FMT_AVG(leftAvgTimeRunningTotal),
+//           FMT_AVG(leftMaxRunningTotal),
+//           FMT_AVG(leftOverflowTmeRunningTotal),
+//           FMT_AVG(rightCarsPassedRunningTotal),
+//           FMT_AVG(rightAvgTimeRunningTotal),
+//           FMT_AVG(rightMaxRunningTotal),
+//           FMT_AVG(rightOverflowTmeRunningTotal));
 }

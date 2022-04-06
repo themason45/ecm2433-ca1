@@ -15,20 +15,20 @@ int main(int argc, char **argv) {
     r = gsl_rng_alloc(T);
 
     gsl_rng_set(r, time(0));
+    if (argc != 5) {
+        printf("4 arguments required. These are\n"
+               "\t- Left arrival rate\n"
+               "\t- Left green time\n"
+               "\t- Right arrival rate\n"
+               "\t- Right green time\n");
+        return EXIT_FAILURE;
+    }
 
-    double lARate = 4.0;
-    double rARate = 4.0;
+    double lARate = atof(argv[1]);
+    int lGPer = atoi(argv[2]);
 
-    int lGPer = 6;
-    int rGPer = 6;
-
-    printf("Parameter values: \n" \
-           "\tFrom left: \n" \
-           "\t\t traffic arrival rate : %f \n" \
-           "\t\t traffic light period: %d \n" \
-           "\tFrom right: \n" \
-           "\t\t traffic arrival rate : %f \n" \
-           "\t\t traffic light period: %d \n", lARate, lGPer, rARate, rGPer);
+    double rARate = atof(argv[3]);
+    int rGPer = atoi(argv[4]);
 
     run100Simulations(r, lGPer, rGPer, lARate, rARate);
 

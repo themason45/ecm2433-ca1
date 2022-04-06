@@ -7,7 +7,7 @@ void clearSide(side_t* side) {
     if (side->head != NULL) free(side->head);
     if (side->tail != NULL) free(side->tail);
 
-    clearWaitTimes(side->stats);
+//    clearWaitTimes(side->stats);
 }
 
 side_t *createSide(gsl_rng *r, bool hasGreenLight, int greenLength, double randBias) {
